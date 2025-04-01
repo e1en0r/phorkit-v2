@@ -1,0 +1,22 @@
+{
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "printWidth": 120,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "arrowParens": "avoid",
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^@(.*)$",
+    "^assets(.*)$",
+    "^config(.*)$",
+    "^context(.*)$",
+    "^hooks(.*)$",
+    "^icons(.*)$",
+    "^styles(.*)$",
+    "^utils(.*)$",
+    "^types(.*)$",
+    "(.*).css$",
+    "^[./]"
+  ],
+  "importOrderParserPlugins": ["jsx", "typescript"]
+}
