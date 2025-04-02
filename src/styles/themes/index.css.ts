@@ -1,8 +1,9 @@
 import { createGlobalTheme } from '@vanilla-extract/css';
-import { THEMES } from 'config/themes';
+import { Theme, THEMES } from 'config/themes';
 import { themeContract } from './contract.css';
-import { darkTheme } from './dark.css';
-import { lightTheme } from './light.css';
+import { themes } from './index';
 
-createGlobalTheme(`.${THEMES.dark.className}`, themeContract, darkTheme);
-createGlobalTheme(`.${THEMES.light.className}`, themeContract, lightTheme);
+Object.keys(themes).forEach(themeKey => {
+  const theme = themeKey as Theme;
+  createGlobalTheme(`.${THEMES[theme].className}`, themeContract, themes[theme]);
+});

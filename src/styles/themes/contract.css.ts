@@ -5,12 +5,11 @@ const colorThemeContract = {
   normal: '',
   contrast: '',
   ghost: '',
+  disabled: '',
   L10: '',
   L20: '',
-  L30: '',
   D10: '',
   D20: '',
-  D30: '',
 };
 
 const paletteThemeContract = {

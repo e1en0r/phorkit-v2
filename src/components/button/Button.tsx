@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Theme } from 'config/themes';
 import { themed } from 'utils/themes';
 import { button, ButtonVariants } from './button.css';
-import { ButtonElement } from './types';
+import { ButtonElement } from './Button.types';
 
 interface BaseButtonProps {
   children?: React.ReactNode;
@@ -28,8 +28,8 @@ const BaseButton = <T extends ButtonElement = 'button'>(
 
   return (
     <Component
+      aria-disabled={disabled ?? undefined}
       className={clsx(className, themed(theme), button({ color, rounded, size }))}
-      data-disabled={disabled ?? undefined}
       disabled={disabled}
       ref={forwardedRef as React.ForwardedRef<HTMLButtonElement>}
       {...props}

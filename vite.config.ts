@@ -8,12 +8,14 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: /^assets\//, replacement: '/src/assets/' },
+      { find: /^components\//, replacement: '/src/components/' },
       { find: /^config\//, replacement: '/src/config/' },
       { find: /^context\//, replacement: '/src/context/' },
       { find: /^hooks\//, replacement: '/src/hooks/' },
       { find: /^icons\//, replacement: '/src/icons/' },
       { find: /^stories\//, replacement: '/src/stories/' },
       { find: /^styles\//, replacement: '/src/styles/' },
+      { find: /^icons\//, replacement: '/src/icons/' },
       { find: /^utils\//, replacement: '/src/utils/' },
     ],
   },

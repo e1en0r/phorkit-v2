@@ -1,12 +1,6 @@
 import { globalStyle } from '@vanilla-extract/css';
 import { themeContract } from 'styles/themes/contract.css';
 
-export const vars = {
-  sbTrackColor: '#232e33',
-  sbThumbColor: '#6baf8d',
-  sbSize: '8px',
-};
-
 globalStyle('html, body, #root', {
   height: '100vh',
   width: '100vw',

@@ -6,5 +6,6 @@ export const flexProperties = defineProperties({
     flexDirection: ['row', 'column', 'row-reverse', 'column-reverse'],
     justifyContent: ['stretch', 'flex-start', 'center', 'flex-end', 'space-around', 'space-between'],
     alignItems: ['stretch', 'flex-start', 'center', 'flex-end'],
+    flex: ['auto', 'none', 'min-content', 'max-content'],
   },
 });

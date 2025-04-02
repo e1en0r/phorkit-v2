@@ -5,7 +5,6 @@
   "trailingComma": "all",
   "arrowParens": "avoid",
   "importOrder": [
-    "<THIRD_PARTY_MODULES>",
     "^@(.*)$",
     "^assets(.*)$",
     "^config(.*)$",

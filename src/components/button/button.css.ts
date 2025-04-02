@@ -16,8 +16,7 @@ export const button = recipe({
     textDecoration: 'none',
 
     selectors: {
-      '&[data-disabled="true"]': {
-        opacity: 0.5,
+      '&[aria-disabled="true"]': {
         cursor: 'not-allowed',
       },
       '&:after': {
@@ -26,12 +25,10 @@ export const button = recipe({
         boxShadow: '0 0 0 0 transparent',
         content: '""',
         left: 0,
-        opacity: 0.2,
         pointerEvents: 'none',
         position: 'absolute',
         right: 0,
         top: 0,
-        transition: 'box-shadow 150ms ease',
       },
     },
   },
@@ -43,14 +40,17 @@ export const button = recipe({
           backgroundColor: themeContract.colors[color].normal,
           color: themeContract.colors[color].contrast,
           selectors: {
-            '&:hover': {
+            '&[aria-disabled="true"]': {
+              backgroundColor: themeContract.colors[color].disabled,
+            },
+            '&:hover&:not([aria-disabled="true"])': {
               backgroundColor: themeContract.colors[color].D10,
             },
-            '&:active': {
+            '&:active&:not([aria-disabled="true"])': {
               backgroundColor: themeContract.colors[color].D20,
             },
             '&:after': {
-              color: themeContract.colors[color].normal,
+              color: themeContract.colors[color].disabled,
             },
           },
         };
@@ -60,13 +60,18 @@ export const button = recipe({
         custom: {
           backgroundColor: `var(--${THEME_PREFIX}-button-background-color)`,
           color: `var(--${THEME_PREFIX}-button-color)`,
-
           selectors: {
-            '&:hover': {
+            '&[aria-disabled="true"]': {
+              backgroundColor: `var(--${THEME_PREFIX}-button-background-color-disabled)`,
+            },
+            '&:hover&:not([aria-disabled="true"])': {
               backgroundColor: `var(--${THEME_PREFIX}-button-background-color-hover)`,
             },
-            '&:active': {
+            '&:active&:not([aria-disabled="true"])': {
               backgroundColor: `var(--${THEME_PREFIX}-button-background-color-active)`,
+            },
+            '&:after': {
+              color: `var(--${THEME_PREFIX}-button-background-color-halo)`,
             },
           },
         },

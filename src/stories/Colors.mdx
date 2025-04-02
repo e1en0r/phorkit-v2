@@ -1,0 +1,63 @@
+import { ColorItem, ColorPalette, Meta } from '@storybook/blocks';
+import { themes } from '../styles/themes';
+import { HideToc } from './helpers/HideToc';
+import { palette } from 'styles/shared/palette.css';
+
+<HideToc />
+<Meta title="Colors" />
+
+# Colors
+<br />
+
+{['light', 'dark'].map((theme) => (
+  <>
+    <h2>{theme.charAt(0).toUpperCase() + theme.slice(1)} Theme</h2>
+    <ColorPalette>
+      <ColorItem
+        title="theme.colors.*.normal"
+        subtitle="The default color states"
+        colors={{
+          accent: themes[theme].colors.accent.normal,
+          success: themes[theme].colors.success.normal,
+          warning: themes[theme].colors.warning.normal,
+          error: themes[theme].colors.error.normal,
+          neutral: themes[theme].colors.neutral.normal,
+        }}
+      />
+  
+      {['accent', 'success', 'warning', 'error', 'neutral'].map(color => (
+        <ColorItem
+          key={color}
+          title={`theme.colors.${color}`}
+          subtitle={`The ${color} color states`}
+          colors={{
+            L20: themes[theme].colors[color].L20,
+            L10: themes[theme].colors[color].L10,
+            normal: themes[theme].colors[color].normal,
+            D10: themes[theme].colors[color].D10,
+            D20: themes[theme].colors[color].D20,
+            disabled: themes[theme].colors[color].disabled,
+            ghost: themes[theme].colors[color].ghost,
+            contrast: themes[theme].colors[color].contrast,
+          }}
+        />
+      ))}
+  
+      {['primary', 'secondary', 'tertiary', 'extreme'].map(palette => (
+        <ColorItem
+          key={palette}
+          title={`theme.palettes.${palette}`}
+          subtitle={`The ${palette} palette`}
+          colors={{
+            background: themes[theme].palettes[palette].background,
+            border: themes[theme].palettes[palette].border,
+            normalText: themes[theme].palettes[palette].text.normal,
+            quietText: themes[theme].palettes[palette].text.quiet,
+            quieterText: themes[theme].palettes[palette].text.quieter,
+            quietestText: themes[theme].palettes[palette].text.quietest,
+          }}
+        />
+      ))}
+  </ColorPalette>
+  </>
+))}

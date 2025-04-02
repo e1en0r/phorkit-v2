@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/react';
 import 'modern-normalize/modern-normalize.css';
+import '../src/index.css';
 import '../src/styles/themes/index.css';
 import { ThemeWrapper } from './ThemeWrapper';
 
@@ -7,12 +8,13 @@ const preview: Preview = {
   globalTypes: {
     theme: {
       description: 'Set the global theme for displaying components.',
-      defaultValue: 'light',
+      defaultValue: 'split',
       toolbar: {
         icon: 'contrast',
         items: [
-          { value: 'light', title: 'Light theme' },
-          { value: 'dark', title: 'Dark theme' },
+          { value: 'light', title: 'Light theme', icon: 'circlehollow' },
+          { value: 'dark', title: 'Dark theme', icon: 'circle' },
+          { value: 'split', title: 'Split view', icon: 'contrast' },
         ],
         dynamicTitle: true,
       },
@@ -28,12 +30,7 @@ const preview: Preview = {
   },
   parameters: {
     backgrounds: {
-      // disable: true,
-      values: [
-        { name: 'Dark background', value: '#0d0d10' },
-        { name: 'Light background', value: '#fafafa' },
-      ],
-      default: 'Light background',
+      disable: true,
     },
     controls: {
       matchers: {
@@ -41,7 +38,17 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    layout: 'centered',
+    docs: {
+      toc: {
+        title: 'Table of Contents',
+      },
+    },
+    layout: 'fullscreen',
+    options: {
+      storySort: {
+        order: ['Introduction', 'Changelog', 'Colors', '*'],
+      },
+    },
   },
   decorators: [ThemeWrapper],
 };
