@@ -1,11 +1,11 @@
 import chroma from 'chroma-js';
 
 const baseColors = {
-  primary: '#09649c',
-  success: '#017541',
-  warning: '#9a5500',
-  error: '#9d0000',
-  neutral: '#3a3a40',
+  primary: '#334865',
+  success: '#53553d',
+  warning: '#8b5c1c',
+  error: '#77391e',
+  neutral: '#182421',
 };
 
 export const lightTheme = {

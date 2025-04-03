@@ -9,3 +9,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+h2.sbdocs-h2, .sbdocs-content h2 {
+  margin-bottom: 1rem;
+}

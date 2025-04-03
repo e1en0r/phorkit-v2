@@ -1,9 +1,9 @@
 import chroma from 'chroma-js';
 
 const baseColors = {
-  primary: '#25a4ba',
+  primary: '#0b84ff',
   success: '#4fba71',
-  warning: '#ff8e0d',
+  warning: '#ff9f0a',
   error: '#f13d2c',
   neutral: '#b6b8c0',
 };

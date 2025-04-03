@@ -14,7 +14,20 @@ const preview: Preview = {
         items: [
           { value: 'light', title: 'Light theme', icon: 'circlehollow' },
           { value: 'dark', title: 'Dark theme', icon: 'circle' },
-          { value: 'split', title: 'Split view', icon: 'contrast' },
+          { value: 'split', title: 'Split view', icon: 'mirror' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+    palette: {
+      description: 'Set the global background color.',
+      defaultValue: 'primary',
+      toolbar: {
+        items: [
+          { value: 'primary', title: 'Primary palette' },
+          { value: 'secondary', title: 'Secondary palette' },
+          { value: 'tertiary', title: 'Tertiary palette' },
+          { value: 'extreme', title: 'Extreme palette' },
         ],
         dynamicTitle: true,
       },

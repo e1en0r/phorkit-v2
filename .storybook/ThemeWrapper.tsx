@@ -11,7 +11,7 @@ const ThemeItem = ({ context, theme, Story }: { context: StoryContext; theme: Th
     className={clsx(
       THEMES[theme].className,
       sprinkles({ display: 'flex', flex: 'auto', alignItems: 'center', padding: 4 }),
-      palette({ palette: 'primary' }),
+      palette({ palette: context.globals.palette ?? 'primary' }),
     )}
   >
     {Story({}, context)}

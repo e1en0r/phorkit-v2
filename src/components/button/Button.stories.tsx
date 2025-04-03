@@ -84,7 +84,7 @@ export const Custom: Story = {
       '--phork-button-background-color-disabled': '#c0c2ef',
       '--phork-button-background-color-hover': '#2c3ea0',
       '--phork-button-background-color-active': '#253589',
-      '--phork-button-background-color-halo': '#c0c2ef',
+      '--phork-button-background-color-halo': 'rgba(50, 71, 183, 0.3)',
       '--phork-button-color': '#fff',
     } as React.CSSProperties,
   },
@@ -95,7 +95,7 @@ export const Custom: Story = {
       '--phork-button-background-color-disabled': '#c0c2ef',
       '--phork-button-background-color-hover': '#2c3ea0',
       '--phork-button-background-color-active': '#253589',
-      '--phork-button-background-color-halo': '#c0c2ef',
+      '--phork-button-background-color-halo': 'rgba(50, 71, 183, 0.3)',
       '--phork-button-color': '#fff',
     });
   },
