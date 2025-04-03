@@ -48,6 +48,9 @@ const preview: Preview = {
   parameters: {
     backgrounds: {
       disable: true,
+      grid: {
+        disable: true,
+      },
     },
     controls: {
       matchers: {

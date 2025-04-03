@@ -1,7 +1,35 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { expect, fn } from '@storybook/test';
 import { sprinkles } from 'styles/shared/sprinkles.css';
-import { Button } from './Button';
+import { Button, ButtonProps } from './Button';
+
+const buttonWeights: ButtonProps['weight'][] = ['solid', 'ghost', 'outline', 'text'];
+
+const ButtonGridDecorator = (color: ButtonProps['color']) => {
+  const Decorator = (Story: StoryFn) => (
+    <div className={sprinkles({ display: 'grid', gridTemplateRows: 2, gap: 4 })}>
+      {[false, true].map(disabled => (
+        <div className={sprinkles({ display: 'flex', margin: 'neg-2', flexWrap: 'wrap' })} key={String(disabled)}>
+          {buttonWeights.map(weight => (
+            <Button
+              key={weight}
+              {...Story.args}
+              className={sprinkles({ margin: 2 })}
+              color={color}
+              disabled={disabled}
+              weight={weight}
+            >
+              Submit
+            </Button>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+
+  Decorator.displayName = `ButtonGridDecorator(${color})`;
+  return Decorator;
+};
 
 const meta = {
   title: 'Controls/Button',
@@ -57,57 +85,57 @@ export const Custom: Story = {
   tags: ['!dev'],
 };
 
-export const Accents: Story = {
-  render: args => (
-    <div className={sprinkles({ display: 'flex', margin: 'neg-2', flexWrap: 'wrap' })}>
-      <Button {...args} className={sprinkles({ margin: 2 })} color="accent" weight="solid" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="accent" weight="ghost" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="accent" weight="outline" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="accent" weight="text" />
-    </div>
-  ),
+export const Accent: Story = {
+  decorators: [ButtonGridDecorator('accent')],
+  parameters: {
+    docs: {
+      canvas: {
+        sourceState: 'none',
+      },
+    },
+  },
 };
 
 export const Success: Story = {
-  render: args => (
-    <div className={sprinkles({ display: 'flex', margin: 'neg-2', flexWrap: 'wrap' })}>
-      <Button {...args} className={sprinkles({ margin: 2 })} color="success" weight="solid" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="success" weight="ghost" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="success" weight="outline" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="success" weight="text" />
-    </div>
-  ),
+  decorators: [ButtonGridDecorator('success')],
+  parameters: {
+    docs: {
+      canvas: {
+        sourceState: 'none',
+      },
+    },
+  },
 };
 
 export const Warning: Story = {
-  render: args => (
-    <div className={sprinkles({ display: 'flex', margin: 'neg-2', flexWrap: 'wrap' })}>
-      <Button {...args} className={sprinkles({ margin: 2 })} color="warning" weight="solid" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="warning" weight="ghost" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="warning" weight="outline" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="warning" weight="text" />
-    </div>
-  ),
+  decorators: [ButtonGridDecorator('warning')],
+  parameters: {
+    docs: {
+      canvas: {
+        sourceState: 'none',
+      },
+    },
+  },
 };
 
 export const Error: Story = {
-  render: args => (
-    <div className={sprinkles({ display: 'flex', margin: 'neg-2', flexWrap: 'wrap' })}>
-      <Button {...args} className={sprinkles({ margin: 2 })} color="error" weight="solid" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="error" weight="ghost" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="error" weight="outline" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="error" weight="text" />
-    </div>
-  ),
+  decorators: [ButtonGridDecorator('error')],
+  parameters: {
+    docs: {
+      canvas: {
+        sourceState: 'none',
+      },
+    },
+  },
 };
 
 export const Neutral: Story = {
-  render: args => (
-    <div className={sprinkles({ display: 'flex', margin: 'neg-2', flexWrap: 'wrap' })}>
-      <Button {...args} className={sprinkles({ margin: 2 })} color="neutral" weight="solid" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="neutral" weight="ghost" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="neutral" weight="outline" />
-      <Button {...args} className={sprinkles({ margin: 2 })} color="neutral" weight="text" />
-    </div>
-  ),
+  decorators: [ButtonGridDecorator('neutral')],
+  parameters: {
+    docs: {
+      canvas: {
+        sourceState: 'none',
+      },
+    },
+  },
 };
