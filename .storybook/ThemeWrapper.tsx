@@ -5,7 +5,17 @@ import { palette } from '../src/styles/shared/palette.css';
 import { sprinkles } from '../src/styles/shared/sprinkles.css';
 import { Theme, THEMES } from '../src/config/themes';
 
-const ThemeItem = ({ context, theme, Story }: { context: StoryContext; theme: Theme; Story: StoryFn }) => (
+const ThemeItem = ({
+  context,
+  role,
+  theme,
+  Story,
+}: {
+  context: StoryContext;
+  role?: string;
+  theme: Theme;
+  Story: StoryFn;
+}) => (
   <div
     data-theme={theme}
     className={clsx(
@@ -13,6 +23,7 @@ const ThemeItem = ({ context, theme, Story }: { context: StoryContext; theme: Th
       sprinkles({ display: 'flex', flex: 'auto', alignItems: 'center', padding: 4 }),
       palette({ palette: context.globals.palette ?? 'primary' }),
     )}
+    role={role}
   >
     {Story({}, context)}
   </div>
@@ -31,6 +42,7 @@ export const ThemeWrapper = (Story: StoryFn, context: StoryContext) => {
             flex: 'auto',
           }),
         )}
+        role="main"
       >
         <ThemeItem context={context} theme="light" Story={Story} />
         <ThemeItem context={context} theme="dark" Story={Story} />
@@ -38,5 +50,5 @@ export const ThemeWrapper = (Story: StoryFn, context: StoryContext) => {
     );
   }
 
-  return <ThemeItem context={context} theme={context.args.theme ?? context.globals.theme} Story={Story} />;
+  return <ThemeItem context={context} role="main" theme={context.args.theme ?? context.globals.theme} Story={Story} />;
 };

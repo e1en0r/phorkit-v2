@@ -19,7 +19,7 @@ const ButtonGridDecorator = (color: ButtonProps['color']) => {
               disabled={disabled}
               weight={weight}
             >
-              Submit
+              {weight ? `${weight.charAt(0).toUpperCase()}${weight.slice(1)}` : 'Submit'}
             </Button>
           ))}
         </div>
