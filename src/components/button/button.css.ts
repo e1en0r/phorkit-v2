@@ -1,5 +1,8 @@
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { THEME_PREFIX } from 'config/themes';
+import { fontSize } from 'styles/shared/config/fontSize';
+import { gridSize } from 'styles/shared/config/gridSize';
+import { sprinkles } from 'styles/shared/sprinkles.css';
 import { themeContract } from 'styles/themes/contract.css';
 
 export const button = recipe({
@@ -7,10 +10,7 @@ export const button = recipe({
     appearance: 'button',
     border: 'none',
     cursor: 'pointer',
-    fontSize: '1rem',
     outline: 'none',
-    margin: 0,
-    padding: 0,
     position: 'relative',
     textAlign: 'left',
     textDecoration: 'none',
@@ -77,30 +77,32 @@ export const button = recipe({
         },
       },
     ),
-    rounded: {
-      false: { borderRadius: '4px' },
-      true: { borderRadius: '100px' },
+    radius: {
+      small: sprinkles({ borderRadius: 'small' }),
+      medium: sprinkles({ borderRadius: 'medium' }),
+      large: sprinkles({ borderRadius: 'large' }),
+      pill: sprinkles({ borderRadius: 'pill' }),
     },
     size: {
       small: {
-        fontSize: '0.8rem',
-        padding: '0.5rem 1rem',
+        fontSize: fontSize.small,
+        padding: `${gridSize[2]} ${gridSize[4]}`,
 
         '&:focus::after': {
-          boxShadow: '0 0 0 0.3rem currentColor',
+          boxShadow: '0 0 0 0.25rem currentColor',
         },
       },
       medium: {
-        fontSize: '1rem',
-        padding: '0.75rem 1.5rem',
+        fontSize: fontSize.medium,
+        padding: `${gridSize[3]} ${gridSize[6]}`,
 
         '&:focus::after': {
-          boxShadow: '0 0 0 0.3rem currentColor',
+          boxShadow: '0 0 0 0.25rem currentColor',
         },
       },
       large: {
-        fontSize: '1.2rem',
-        padding: '1rem 2rem',
+        fontSize: fontSize.large,
+        padding: `${gridSize[4]} ${gridSize[8]}`,
 
         '&:focus::after': {
           boxShadow: '0 0 0 0.4rem currentColor',
@@ -111,7 +113,7 @@ export const button = recipe({
 
   defaultVariants: {
     color: 'accent',
-    rounded: false,
+    radius: 'medium',
     size: 'medium',
   },
 });

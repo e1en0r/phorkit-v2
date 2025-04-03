@@ -1,6 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
-export const link = style({
+export const typographyLink = style({
   textDecoration: 'none',
   color: 'inherit',
   cursor: 'pointer',

@@ -11,7 +11,7 @@ interface BaseButtonProps {
   className?: string;
   color?: ButtonVariants['color'];
   disabled?: boolean;
-  rounded?: ButtonVariants['rounded'];
+  radius?: ButtonVariants['radius'];
   size?: 'small' | 'medium' | 'large';
   theme?: Theme;
 }
@@ -21,7 +21,16 @@ export type ButtonProps<T extends ButtonElement = 'button'> = T extends 'button'
   : BaseButtonProps & { asChild: true };
 
 const BaseButton = <T extends ButtonElement = 'button'>(
-  { asChild, className, color = 'accent', disabled, rounded = false, size = 'medium', theme, ...props }: ButtonProps<T>,
+  {
+    asChild,
+    className,
+    color = 'accent',
+    disabled,
+    radius = 'medium',
+    size = 'medium',
+    theme,
+    ...props
+  }: ButtonProps<T>,
   forwardedRef: React.ForwardedRef<HTMLElementTagNameMap[T]>,
 ): React.ReactElement<ButtonProps<T>, T> => {
   const Component = asChild ? Slot.Root : 'button';
@@ -29,7 +38,7 @@ const BaseButton = <T extends ButtonElement = 'button'>(
   return (
     <Component
       aria-disabled={disabled ?? undefined}
-      className={clsx(className, themed(theme), button({ color, rounded, size }))}
+      className={clsx(className, themed(theme), button({ color, radius, size }))}
       disabled={disabled}
       ref={forwardedRef as React.ForwardedRef<HTMLButtonElement>}
       {...props}
