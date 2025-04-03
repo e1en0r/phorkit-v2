@@ -1,14 +1,16 @@
 import { recipe, RecipeVariants } from '@vanilla-extract/recipes';
 import { THEME_PREFIX } from 'config/themes';
 import { fontSize } from 'styles/shared/config/fontSize';
-import { gridSize } from 'styles/shared/config/gridSize';
+import { spacingSize } from 'styles/shared/config/spacingSize';
 import { sprinkles } from 'styles/shared/sprinkles.css';
 import { themeContract } from 'styles/themes/contract.css';
+
+const buttonColors = ['accent', 'success', 'warning', 'error', 'neutral'] as const;
 
 export const button = recipe({
   base: {
     appearance: 'button',
-    border: 'none',
+    border: '1px solid transparent',
     cursor: 'pointer',
     outline: 'none',
     position: 'relative',
@@ -21,62 +23,46 @@ export const button = recipe({
       },
       '&:after': {
         borderRadius: 'inherit',
-        bottom: 0,
         boxShadow: '0 0 0 0 transparent',
         content: '""',
-        left: 0,
         pointerEvents: 'none',
         position: 'absolute',
-        right: 0,
-        top: 0,
+        // account for the border width
+        bottom: '-1px',
+        left: '-1px',
+        right: '-1px',
+        top: '-1px',
       },
     },
   },
-
   variants: {
-    color: (['accent', 'success', 'warning', 'error', 'neutral'] as const).reduce<Record<string, object>>(
-      (acc, color) => {
-        acc[color] = {
-          backgroundColor: themeContract.colors[color].normal,
-          color: themeContract.colors[color].contrast,
-          selectors: {
-            '&[aria-disabled="true"]': {
-              backgroundColor: themeContract.colors[color].disabled,
-            },
-            '&:hover&:not([aria-disabled="true"])': {
-              backgroundColor: themeContract.colors[color].D10,
-            },
-            '&:active&:not([aria-disabled="true"])': {
-              backgroundColor: themeContract.colors[color].D20,
-            },
-            '&:after': {
-              color: themeContract.colors[color].disabled,
-            },
+    custom: {
+      true: {
+        backgroundColor: `var(--${THEME_PREFIX}-button-background-color)`,
+        borderColor: `var(--${THEME_PREFIX}-button-border-color)`,
+        color: `var(--${THEME_PREFIX}-button-color)`,
+        selectors: {
+          '&[aria-disabled="true"]': {
+            backgroundColor: `var(--${THEME_PREFIX}-button-background-color-disabled)`,
+            borderColor: `var(--${THEME_PREFIX}-button-border-color-disabled)`,
+            color: `var(--${THEME_PREFIX}-button-color-disabled)`,
           },
-        };
-        return acc;
-      },
-      {
-        custom: {
-          backgroundColor: `var(--${THEME_PREFIX}-button-background-color)`,
-          color: `var(--${THEME_PREFIX}-button-color)`,
-          selectors: {
-            '&[aria-disabled="true"]': {
-              backgroundColor: `var(--${THEME_PREFIX}-button-background-color-disabled)`,
-            },
-            '&:hover&:not([aria-disabled="true"])': {
-              backgroundColor: `var(--${THEME_PREFIX}-button-background-color-hover)`,
-            },
-            '&:active&:not([aria-disabled="true"])': {
-              backgroundColor: `var(--${THEME_PREFIX}-button-background-color-active)`,
-            },
-            '&:after': {
-              color: `var(--${THEME_PREFIX}-button-background-color-halo)`,
-            },
+          '&:hover&:not([aria-disabled="true"])': {
+            backgroundColor: `var(--${THEME_PREFIX}-button-background-color-hover)`,
+            borderColor: `var(--${THEME_PREFIX}-button-border-color-hover)`,
+            color: `var(--${THEME_PREFIX}-button-color-hover)`,
+          },
+          '&:active&:not([aria-disabled="true"])': {
+            backgroundColor: `var(--${THEME_PREFIX}-button-background-color-active)`,
+            borderColor: `var(--${THEME_PREFIX}-button-border-color-active)`,
+            color: `var(--${THEME_PREFIX}-button-color-active)`,
+          },
+          '&:after': {
+            color: `var(--${THEME_PREFIX}-button-color-halo)`,
           },
         },
       },
-    ),
+    },
     radius: {
       small: sprinkles({ borderRadius: 'small' }),
       medium: sprinkles({ borderRadius: 'medium' }),
@@ -86,7 +72,7 @@ export const button = recipe({
     size: {
       small: {
         fontSize: fontSize.small,
-        padding: `${gridSize[2]} ${gridSize[4]}`,
+        padding: `${spacingSize[2]} ${spacingSize[4]}`,
 
         '&:focus::after': {
           boxShadow: '0 0 0 0.25rem currentColor',
@@ -94,7 +80,7 @@ export const button = recipe({
       },
       medium: {
         fontSize: fontSize.medium,
-        padding: `${gridSize[3]} ${gridSize[6]}`,
+        padding: `${spacingSize[3]} ${spacingSize[6]}`,
 
         '&:focus::after': {
           boxShadow: '0 0 0 0.25rem currentColor',
@@ -102,7 +88,7 @@ export const button = recipe({
       },
       large: {
         fontSize: fontSize.large,
-        padding: `${gridSize[4]} ${gridSize[8]}`,
+        padding: `${spacingSize[4]} ${spacingSize[8]}`,
 
         '&:focus::after': {
           boxShadow: '0 0 0 0.4rem currentColor',
@@ -110,12 +96,156 @@ export const button = recipe({
       },
     },
   },
-
   defaultVariants: {
-    color: 'accent',
+    custom: false,
     radius: 'medium',
     size: 'medium',
   },
 });
 
-export type ButtonVariants = NonNullable<RecipeVariants<typeof button>>;
+export const solidButton = recipe({
+  variants: {
+    color: buttonColors.reduce<Record<string, object>>((acc, color) => {
+      acc[color] = {
+        backgroundColor: themeContract.colors[color].normal,
+        borderColor: themeContract.colors[color].normal,
+        color: themeContract.colors[color].contrast,
+        selectors: {
+          '&[aria-disabled="true"]': {
+            backgroundColor: themeContract.colors[color].disabled,
+            borderColor: themeContract.colors[color].disabled,
+          },
+          '&:hover&:not([aria-disabled="true"])': {
+            backgroundColor: themeContract.colors[color].D10,
+            borderColor: themeContract.colors[color].D10,
+          },
+          '&:active&:not([aria-disabled="true"])': {
+            backgroundColor: themeContract.colors[color].D20,
+            borderColor: themeContract.colors[color].D20,
+          },
+          '&:after': {
+            color: themeContract.colors[color].disabled,
+          },
+        },
+      };
+      return acc;
+    }, {}),
+  },
+  defaultVariants: {
+    color: 'accent',
+  },
+});
+
+export const ghostButton = recipe({
+  variants: {
+    color: buttonColors.reduce<Record<string, object>>((acc, color) => {
+      acc[color] = {
+        backgroundColor: themeContract.colors[color].ghost,
+        borderColor: themeContract.colors[color].normal,
+        color: themeContract.colors[color].normal,
+        selectors: {
+          '&[aria-disabled="true"]': {
+            backgroundColor: 'transparent',
+            borderColor: themeContract.colors[color].disabled,
+            color: themeContract.colors[color].disabled,
+          },
+          '&:hover&:not([aria-disabled="true"])': {
+            backgroundColor: themeContract.colors[color].normal,
+            borderColor: themeContract.colors[color].D10,
+            color: themeContract.colors[color].contrast,
+          },
+          '&:active&:not([aria-disabled="true"])': {
+            backgroundColor: themeContract.colors[color].D10,
+            borderColor: themeContract.colors[color].D20,
+            color: themeContract.colors[color].contrast,
+          },
+          '&:after': {
+            color: themeContract.colors[color].disabled,
+          },
+        },
+      };
+      return acc;
+    }, {}),
+  },
+  defaultVariants: {
+    color: 'accent',
+  },
+});
+
+export const outlineButton = recipe({
+  variants: {
+    color: buttonColors.reduce<Record<string, object>>((acc, color) => {
+      acc[color] = {
+        backgroundColor: 'transparent',
+        borderColor: themeContract.colors[color].normal,
+        color: themeContract.colors[color].normal,
+        selectors: {
+          '&[aria-disabled="true"]': {
+            borderColor: themeContract.colors[color].disabled,
+            color: themeContract.colors[color].disabled,
+          },
+          '&:hover&:not([aria-disabled="true"])': {
+            backgroundColor: themeContract.colors[color].ghost,
+            borderColor: themeContract.colors[color].D10,
+            color: themeContract.colors[color].D10,
+          },
+          '&:active&:not([aria-disabled="true"])': {
+            backgroundColor: themeContract.colors[color].ghost,
+            borderColor: themeContract.colors[color].D20,
+            color: themeContract.colors[color].D20,
+          },
+          '&:after': {
+            color: themeContract.colors[color].disabled,
+          },
+        },
+      };
+      return acc;
+    }, {}),
+  },
+  defaultVariants: {
+    color: 'accent',
+  },
+});
+
+export const textButton = recipe({
+  variants: {
+    color: buttonColors.reduce<Record<string, object>>((acc, color) => {
+      acc[color] = {
+        backgroundColor: 'transparent',
+        borderColor: 'transparent',
+        color: themeContract.colors[color].normal,
+        selectors: {
+          '&[aria-disabled="true"]': {
+            color: themeContract.colors[color].disabled,
+          },
+          '&:hover&:not([aria-disabled="true"])': {
+            borderColor: themeContract.colors[color].D10,
+            color: themeContract.colors[color].D10,
+          },
+          '&:active&:not([aria-disabled="true"])': {
+            borderColor: themeContract.colors[color].D20,
+            color: themeContract.colors[color].D20,
+          },
+          '&:after': {
+            color: themeContract.colors[color].disabled,
+          },
+        },
+      };
+      return acc;
+    }, {}),
+  },
+  defaultVariants: {
+    color: 'accent',
+  },
+});
+
+export const buttonWeights = {
+  solid: solidButton,
+  ghost: ghostButton,
+  outline: outlineButton,
+  text: textButton,
+};
+
+export type ButtonVariants = NonNullable<RecipeVariants<typeof button>> & {
+  color?: (typeof buttonColors)[number];
+};

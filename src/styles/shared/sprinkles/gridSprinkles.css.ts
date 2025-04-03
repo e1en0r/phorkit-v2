@@ -1,23 +1,27 @@
 import { defineProperties } from '@vanilla-extract/sprinkles';
-import { gridSize } from 'styles/shared/config/gridSize';
+import { spacingSize } from 'styles/shared/config/spacingSize';
+
+export const gridFractions = Array.from({ length: 12 }, (_, i) => i).reduce(
+  (acc, i) => {
+    acc[i + 1] = i === 0 ? '1fr' : `repeat(${i + 1}, 1fr)`;
+    return acc;
+  },
+  {} as Record<number, string | number>,
+);
 
 export const gridProperties = defineProperties({
   properties: {
-    paddingTop: gridSize,
-    paddingBottom: gridSize,
-    paddingLeft: gridSize,
-    paddingRight: gridSize,
-    marginTop: gridSize,
-    marginBottom: gridSize,
-    marginLeft: gridSize,
-    marginRight: gridSize,
+    gridTemplateColumns: gridFractions,
+    gridTemplateRows: gridFractions,
+    gridColumnGap: spacingSize,
+    gridRowGap: spacingSize,
+    gridGap: spacingSize,
+    gridAutoFlow: ['row', 'column', 'dense'],
+    gridAutoColumns: ['auto', 'min-content', 'max-content'],
+    gridAutoRows: ['auto', 'min-content', 'max-content'],
   },
   shorthands: {
-    padding: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],
-    paddingX: ['paddingLeft', 'paddingRight'],
-    paddingY: ['paddingTop', 'paddingBottom'],
-    margin: ['marginTop', 'marginBottom', 'marginLeft', 'marginRight'],
-    marginX: ['marginLeft', 'marginRight'],
-    marginY: ['marginTop', 'marginBottom'],
+    grid: ['gridTemplateColumns', 'gridTemplateRows'],
+    gap: ['gridColumnGap', 'gridRowGap'],
   },
 });

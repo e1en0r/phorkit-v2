@@ -34,6 +34,10 @@ const preview: Preview = {
     },
   },
   argTypes: {
+    style: {
+      description: 'Component style override',
+      table: { category: 'Style' },
+    },
     theme: {
       control: 'inline-radio',
       options: [undefined, 'light', 'dark'],
