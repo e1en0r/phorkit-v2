@@ -18,22 +18,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true,
-
-    /* Custom */
-    "baseUrl": "./src",
-    "paths": {
-      "assets": ["src/assets"],
-      "components": ["src/components"],
-      "config": ["src/config"],
-      "context": ["src/context"],
-      "hooks": ["src/hooks"],
-      "icons": ["src/icons"],
-      "stories": ["src/stories"],
-      "styles": ["src/styles"],
-      "utils": ["src/utils"]
-    }
+    "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "commitlint.config.ts", "vite.config.ts"],
+  "include": ["src/scripts", "commitlint.config.ts", "vite.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

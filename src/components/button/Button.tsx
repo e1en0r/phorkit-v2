@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { Slot } from 'radix-ui';
 import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import { Theme } from 'config/themes';
 import { themed } from 'utils/themes';
 import { button, ButtonVariants, buttonWeights } from './button.css';
@@ -35,7 +35,7 @@ const BaseButton = <T extends ButtonElement = 'button'>(
   }: ButtonProps<T>,
   forwardedRef: React.ForwardedRef<HTMLElementTagNameMap[T]>,
 ): React.ReactElement<ButtonProps<T>, T> => {
-  const Component = asChild ? Slot.Root : 'button';
+  const Component = asChild ? Slot : 'button';
   const isCustomColors = color === 'custom';
 
   return (
